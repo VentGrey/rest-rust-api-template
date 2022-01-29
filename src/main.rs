@@ -11,6 +11,7 @@ extern crate rocket;
 
 mod db;
 mod models;
+mod routes;
 mod schema;
 mod static_files;
 

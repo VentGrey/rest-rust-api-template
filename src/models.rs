@@ -18,7 +18,8 @@ pub struct Cat {
     pub description: String,
 }
 
-#[derive(Insertable)]
+#[derive(Insertable, Serialize, Deserialize)]
+#[serde(crate = "rocket::serde")]
 #[table_name = "cats"]
 pub struct NewCat {
     pub name: String,
