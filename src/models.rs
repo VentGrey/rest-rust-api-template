@@ -13,3 +13,12 @@ pub struct Cat {
     pub is_adopted: bool,
     pub description: String,
 }
+
+#[derive(Insertable)]
+#[table_name = "cats"]
+pub struct NewCat {
+    pub name: String,
+    pub photo_url: String,
+    pub is_adopted: bool,
+    pub description: String,
+}
