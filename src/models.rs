@@ -37,4 +37,27 @@ impl Cat {
             .load::<Cat>(conn)
             .expect("Ocurrió un error al cargar todos los gatos...")
     }
+
+    pub fn update_by_id(id: i32, conn: &SqliteConnection, cat: NewCat) -> bool {
+        use crate::schema::cats::dsl::{
+            description as d, is_adopted as i, name as n, photo_url as p,
+        };
+
+        let NewCat {
+            name,
+            photo_url,
+            is_adopted,
+            description,
+        } = cat;
+
+        diesel::update(all_cats.find(id))
+            .set((
+                n.eq(name),
+                p.eq(photo_url),
+                i.eq(is_adopted),
+                d.eq(description),
+            ))
+            .execute(conn)
+            .is_ok()
+    }
 }
