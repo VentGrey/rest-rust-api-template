@@ -1,5 +1,8 @@
 use std::io;
 
+#[macro_use]
+extern crate diesel;
+
 mod models;
 mod schema;
 

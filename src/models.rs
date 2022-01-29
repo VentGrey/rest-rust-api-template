@@ -22,3 +22,19 @@ pub struct NewCat {
     pub is_adopted: bool,
     pub description: String,
 }
+
+impl Cat {
+    pub fn show(id: i32, conn: &SqliteConnection) -> Vec<Cat> {
+        all_cats
+            .find(id)
+            .load::<Cat>(conn)
+            .expect("Ocurrió un error al cargar el gato...")
+    }
+
+    pub fn all(conn: &SqliteConnection) -> Vec<Cat> {
+        all_cats
+            .order(cats::id.desc())
+            .load::<Cat>(conn)
+            .expect("Ocurrió un error al cargar todos los gatos...")
+    }
+}
