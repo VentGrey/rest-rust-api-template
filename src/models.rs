@@ -60,4 +60,25 @@ impl Cat {
             .execute(conn)
             .is_ok()
     }
+
+    pub fn insert(cat: NewCat, conn: &SqliteConnection) -> bool {
+        diesel::insert_into(cats::table)
+            .values(&cat)
+            .execute(conn)
+            .is_ok()
+    }
+
+    pub fn delete_by_id(id: i32, conn: &SqliteConnection) -> bool {
+        if Cat::show(id, conn).is_empty() {
+            return false;
+        };
+        diesel::delete(all_cats.find(id)).execute(conn).is_ok()
+    }
+
+    pub fn all_by_name(name: String, conn: &SqliteConnection) -> Vec<Cat> {
+        all_cats
+            .filter(cats::name.eq(name))
+            .load::<Cat>(conn)
+            .expect("Ocurrió un error al cargar los gatos por nombre")
+    }
 }
