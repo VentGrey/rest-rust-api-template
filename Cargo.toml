@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 diesel = { version = "1.4.4", features = ["sqlite", "r2d2"] }
 dotenv = "0.15.0"
+rocket = { version = "0.5.0-rc.1", features = [ "json" ] }

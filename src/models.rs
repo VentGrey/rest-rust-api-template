@@ -2,10 +2,14 @@ use diesel;
 use diesel::prelude::*;
 use diesel::sqlite::SqliteConnection;
 
+use rocket::serde::Deserialize;
+use rocket::serde::Serialize;
+
 use crate::schema::cats;
 use crate::schema::cats::dsl::cats as all_cats;
 
-#[derive(Queryable)]
+#[derive(Serialize, Queryable, Debug, Clone)]
+#[serde(crate = "rocket::serde")]
 pub struct Cat {
     pub id: i32,
     pub name: String,
