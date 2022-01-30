@@ -25,8 +25,20 @@ fn rocket() -> _ {
     dotenv().ok();
     let db_url: String = env::var("DATABASE_URL").expect("set DATABASE_URL");
     let pool = db::init_pool(db_url);
-    rocket::build().mount(
-        "/",
-        routes![crate::static_files::all, crate::static_files::index],
-    )
+    rocket::build()
+        .mount(
+            "/api/v1/",
+            routes![
+                crate::routes::index,
+                crate::routes::new,
+                crate::routes::show,
+                crate::routes::delete,
+                crate::routes::name,
+                crate::routes::update
+            ],
+        )
+        .mount(
+            "/",
+            routes![crate::static_files::all, crate::static_files::index],
+        )
 }
