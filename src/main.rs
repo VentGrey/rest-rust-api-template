@@ -15,11 +15,6 @@ mod routes;
 mod schema;
 mod static_files;
 
-#[get("/")]
-fn index() -> &'static str {
-    "Hello, world!"
-}
-
 #[launch]
 fn rocket() -> _ {
     dotenv().ok();
