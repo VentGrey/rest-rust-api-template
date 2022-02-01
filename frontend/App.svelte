@@ -16,62 +16,65 @@
     }
 
     .container {
+        align-content: center;
         display: grid;
         grid-template-columns: auto auto auto auto;
         grid-template-rows: auto auto auto auto;
         justify-content: space-evenly;
-        align-content: center;
     }
 
     .card {
-        margin: 1.3em;
-        padding: 1.3em;
         border-radius: 1.5em;
         box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.3);
+        margin: 1.3em;
+        padding: 1.3em;
     }
 
     .img-gato {
-        display: inline-block;
-        max-width: 100%;
-        max-height: 100%;
-        height: 45%;
-        width: 45%;
         border-radius: 1.5em;
+        display: inline-block;
+        height: 45%;
+        max-height: 100%;
+        max-width: 100%;
+        width: 45%;
     }
 
     .cat-name{
-        display: block;
         color: #452981;
+        display: block;
         text-shadow: 1px 1px 1px #452981;
     }
 
     .adopted {
-        display: inline-block;
-        padding: 5px;
         background-color: #3a9104;
         background: linear-gradient(90deg, rgba(88,230,0,1) 0%, rgba(58,145,4,1) 100%);
+        border-radius: 0.5em;
         box-shadow: 1px 1px 2px 1px rgba(58, 145, 4, 0.3);
         color: #FAFAFA;
-        border-radius: 0.5em;
+        display: inline-block;
         font-size: 0.9em;
+        padding: 5px;
     }
 
     .noadopted {
-        display: inline-block;
-        padding: 5px;
         background-color: #002e99;
         background: linear-gradient(90deg, rgba(0,77,255,1) 0%, rgba(0,46,153,1) 100%);
+        border-radius: 0.5em;
         box-shadow: 1px 1px 2px 1px rgba(0, 46, 153, 0.3);
         color: #FAFAFA;
-        border-radius: 0.5em;
+        display: inline-block;
         font-size: 0.9em;
+        padding: 5px;
     }
 
     .cat-desc {
         color: #666666;
+        margin-bottom: 1.5em;
+        margin-top: 1.5em;
+        overflow-wrap: break-word;
+        padding-bottom: 5em;
         text-overflow: ellipsis;
         word-break: break-all;
-        overflow-wrap: break-word;
     }
 </style>
 
@@ -83,15 +86,16 @@
         {#await fetchCats}
             <p>Cargando gatos...</p>
         {:then data}
-        <div class="card">
-            <img class="img-gato" src="https://www.rover.com/blog/wp-content/uploads/2019/06/sitting-siamese-cat-960x540.jpg" alt="Foto del gatito"/>
-            <h2 class="cat-name">Nombre del gatito</h2>
-            <h3 class="adopted">Adoptado ❤️</h3>
-            <h3 class="noadopted">Buscando un hogar 🏠</h3>
-            <hr>
-            <p class="cat-desc">Descripción del gato en cuestión. Las descripciones de los gatos largas son más convenientes para que las personas decidan adoptar a los gatitos que les presentemos.</p>
-        </div>
-
+            {#each data.result as cat}
+                <div class="card">
+                    <img class="img-gato" src="https://www.rover.com/blog/wp-content/uploads/2019/06/sitting-siamese-cat-960x540.jpg" alt="Foto del gatito"/>
+                    <h2 class="cat-name">Nombre del gatito</h2>
+                    <h3 class="adopted">Adoptado ❤️</h3>
+                    <h3 class="noadopted">Buscando un hogar 🏠</h3>
+                    <hr>
+                    <p class="cat-desc">Descripción del gato en cuestión. Las descripciones de los gatos largas son más convenientes para que las personas decidan adoptar a los gatitos que les presentemos.</p>
+                </div>
+            {/each}
         {:catch error}
             <p>Ocurrió un error al cargar los gatos :(</p>
         {/await}
