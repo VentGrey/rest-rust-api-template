@@ -88,12 +88,15 @@
         {:then data}
             {#each data.result as cat}
                 <div class="card">
-                    <img class="img-gato" src="https://www.rover.com/blog/wp-content/uploads/2019/06/sitting-siamese-cat-960x540.jpg" alt="Foto del gatito"/>
-                    <h2 class="cat-name">Nombre del gatito</h2>
-                    <h3 class="adopted">Adoptado ❤️</h3>
-                    <h3 class="noadopted">Buscando un hogar 🏠</h3>
+                    <img class="img-gato" src={cat.photo_url} alt="Foto del gatito"/>
+                    <h2 class="cat-name">{cat.name}</h2>
+                    {#if cat.is_adopted}
+                        <h3 class="adopted">Adoptado ❤️</h3>
+                    {:else}
+                        <h3 class="noadopted">Buscando un hogar 🏠</h3>
+                    {/if}
                     <hr>
-                    <p class="cat-desc">Descripción del gato en cuestión. Las descripciones de los gatos largas son más convenientes para que las personas decidan adoptar a los gatitos que les presentemos.</p>
+                    <p class="cat-desc">{cat.description}</p>
                 </div>
             {/each}
         {:catch error}
